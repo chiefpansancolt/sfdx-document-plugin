@@ -6,60 +6,36 @@
  */
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 import * as os from 'os';
-import * as path from 'path';
-import { flags, SfdxCommand } from '@salesforce/command';
-import { fs, Messages, SfdxProject } from '@salesforce/core';
-import {
-  InitResultFormatter,
-  InitResults,
-  FileResponse,
-  CommandResults,
-} from '../../../../formatters/initResultFormatter';
+import { AnyJson } from '@salesforce/ts-types';
+import { flags } from '@salesforce/command';
+import { Messages } from '@salesforce/core';
+import { TemplateCommand } from '@salesforce/plugin-templates/lib/utils';
+import InitilizationGenerator from '../../../../generators/initilizationGenerator';
 
 Messages.importMessagesDirectory(__dirname);
 
 const messages = Messages.loadMessages('sfdx-document-plugin', 'web-init');
 
-export default class Init extends SfdxCommand {
+export default class Init extends TemplateCommand {
   public static description = messages.getMessage('description');
   public static examples = messages.getMessage('examples').split(os.EOL);
 
   protected static flagsConfig = {
-    name: flags.string({
-      default: 'docs',
+    foldername: flags.string({
       char: 'n',
       description: messages.getMessage('flags.name'),
+      default: 'docs',
+    }),
+    outputdir: flags.string({
+      char: 'd',
+      description: messages.getMessage('flags.outputdir'),
+      default: '.',
     }),
   };
 
   protected static requiresProject = true;
 
-  public async run(): Promise<CommandResults> {
-    const projectPath = await SfdxProject.resolveProjectPath();
-    const files: string[] = ['scripts.js', 'styles.css'];
-    let results: InitResults;
-
-    for (const file of files) {
-      let response: FileResponse;
-      const pathToFile = path.join(__dirname, 'templates', 'resources', file);
-      const pathToNewDestination = path.join(projectPath, this.flags.name, 'assets', file);
-      fs.copyFile(pathToFile, pathToNewDestination, function (err) {
-        response.fullName = file.split('.')[0];
-        response.fileType = file.split('.')[1];
-        response.filePath = pathToNewDestination;
-        if (err) {
-          response.status = err.message;
-        } else {
-          response.status = messages.getMessage('SuccessMessage');
-        }
-      });
-      results.resources.push(response);
-    }
-
-    const formatter = new InitResultFormatter(this.logger, this.ux, results);
-
-    formatter.display();
-
-    return formatter.getJson();
+  public async run(): Promise<AnyJson> {
+    return this.runGenerator(InitilizationGenerator);
   }
 }
