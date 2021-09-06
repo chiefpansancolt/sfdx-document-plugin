@@ -1,7 +1,7 @@
 [
   {
-    "command": "hello:org",
-    "plugin": "@salesforce/plugin-template",
-    "flags": ["apiversion", "force", "json", "loglevel", "name", "targetdevhubusername", "targetusername"]
+    "command": "document:generate:web:init",
+    "plugin": "sfdx-document-plugin",
+    "flags": ["name", "targetusername"]
   }
 ]

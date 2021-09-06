@@ -1,0 +1,14 @@
+{
+  "dscription": "Generate the inital base structure of the documentation web app",
+  "example": [
+    "$ sfdx document:generate:web:init -n docs -u my-user@my-org.com",
+    "$ sfdx document:generate:web:init -n docs"
+  ],
+  "flags": {
+    "name": "name of the folder to generate documentation default docs"
+  },
+  "FilesCreated": "Files Created",
+  "NoResultsFound": "No Results Found",
+  "SuccessMessage": "Created",
+  "FilesErrored": "Files Errored on Clone"
+}

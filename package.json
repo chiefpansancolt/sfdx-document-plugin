@@ -1,9 +1,9 @@
 {
-  "name": "@salesforce/plugin-template",
-  "description": "A template repository for sfdx plugins",
+  "name": "sfdx-document-plugin",
+  "description": "A CLI built in sfdx to auto generate documentation from markdown and comments in salesforce code",
   "version": "1.0.0",
   "author": "Salesforce",
-  "bugs": "https://github.com/forcedotcom/cli/issues",
+  "bugs": "https://github.com/chiefpansancolt/sfdx-document-plugin/issues",
   "dependencies": {
     "@oclif/config": "^1",
     "@salesforce/command": "^3.1.3",
@@ -18,10 +18,13 @@
     "@salesforce/dev-scripts": "^0.9.15",
     "@salesforce/plugin-command-reference": "^1.3.4",
     "@salesforce/prettier-config": "^0.0.2",
+    "@salesforce/source-deploy-retrieve": "^4.3.5",
     "@salesforce/ts-sinon": "1.3.18",
     "@typescript-eslint/eslint-plugin": "^4.28.1",
     "@typescript-eslint/parser": "^4.28.1",
+    "autoprefixer": "^10.3.4",
     "chai": "^4.3.4",
+    "chalk": "^4.1.2",
     "cz-conventional-changelog": "^3.3.0",
     "eslint": "^7.29.0",
     "eslint-config-prettier": "^8.3.0",
@@ -36,10 +39,12 @@
     "lint-staged": "^11.0.0",
     "mocha": "^8.4.0",
     "nyc": "^15.1.0",
+    "postcss": "^8.3.6",
     "prettier": "^2.3.2",
     "pretty-quick": "^3.1.0",
     "shx": "0.2.2",
     "sinon": "^11.1.1",
+    "tailwindcss": "^2.2.9",
     "ts-node": "^10.0.0",
     "typescript": "^4.1.3"
   },
@@ -74,12 +79,18 @@
       "@salesforce/plugin-command-reference"
     ],
     "topics": {
-      "hello": {
-        "description": "Commands to say hello."
+      "document": {
+        "generate": {
+          "web": {
+            "init": {
+              "description": "Generate Initial Structure for Documentation Web App"
+            }
+          }
+        }
       }
     }
   },
-  "repository": "salesforcecli/plugin-template",
+  "repository": "chiefpansancolt/sfdx-document-plugin",
   "scripts": {
     "build": "sf-build",
     "clean": "sf-clean",
@@ -99,13 +110,6 @@
     "test:deprecation-policy": "./bin/run snapshot:compare",
     "test:nuts": "nyc mocha \"**/*.nut.ts\" --slow 4500 --timeout 600000 --parallel",
     "version": "oclif-dev readme"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "sf-husky-pre-commit",
-      "commit-msg": "sf-husky-commit-msg",
-      "pre-push": "sf-husky-pre-push"
-    }
   },
   "publishConfig": {
     "access": "public"
