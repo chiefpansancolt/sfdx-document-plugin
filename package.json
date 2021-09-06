@@ -21,7 +21,7 @@
     "@salesforce/source-deploy-retrieve": "^4.3.5",
     "@salesforce/ts-sinon": "1.3.18",
     "@typescript-eslint/eslint-plugin": "^4.28.1",
-    "@typescript-eslint/parser": "^4.28.1",
+    "@typescript-eslint/parser": "^4.30.0",
     "autoprefixer": "^10.3.4",
     "chai": "^4.3.4",
     "chalk": "^4.1.2",
