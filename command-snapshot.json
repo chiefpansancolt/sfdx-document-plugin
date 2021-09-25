@@ -2,6 +2,6 @@
   {
     "command": "document:generate:web:init",
     "plugin": "sfdx-document-plugin",
-    "flags": ["name", "targetusername"]
+    "flags": ["json", "loglevel", "name", "outputdir"]
   }
 ]
