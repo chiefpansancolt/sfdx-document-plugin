@@ -1,0 +1,3 @@
+[submodule "sfdx-document-template"]
+	path = sfdx-document-template
+	url = https://github.com/ncino-cpezza/sfdx-document-template
